@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Arcos y Círculos</title>
+    <style>
+    canvas{
+      border: 1px solid black;
+        margin-bottom: 10px;
+      }
+
+      #cantidad{
+        font-weight: bold;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="320" height="340"></canvas>
+    <br>
+    <label>Mueve para dividir: </label>
+    <span id="cantidad">4</span>
+    <br>
+    <input type="range" id="myRange" value="4" min="2" max="20">
+    <script src="DibujaArcos.js"></script>
+  </body>
+</html>
