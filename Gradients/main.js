@@ -66,5 +66,5 @@ function canvasApp(){
 
 	drawScene();
 
-//  setInterval(dibujaBolita, 1000 / 160);
+  setInterval(dibujaBolita, 1000 / 160);
 }
