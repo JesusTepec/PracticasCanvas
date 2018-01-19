@@ -21,6 +21,7 @@ function canvasApp() {
     var colores = [];
     var modoDegradado = "HORIZONTAL";
     var btnAgregar = document.getElementById("AgregarColor");
+    var btnAleatorio = document.getElementById("btnAleatorio");
     var btnHorizontal = document.getElementById("btnHorizontal");
     var btnVertical = document.getElementById("btnVertical");
     var btnDiagonal1 = document.getElementById("btnDiagonal1");
@@ -42,6 +43,13 @@ function canvasApp() {
     return "#" + randIntHex(0, 255) + randIntHex(0, 255) + randIntHex(0, 255) + ""
   }
 
+  function degradadoAleatorio(){
+    colores[0] = colorAleatorio();
+    colores[1] = colorAleatorio();
+    colores[2] = colorAleatorio();
+    drawScene();
+  }
+
   function drawScene() {
     var degradado = null;
     if(modoDegradado === "HORIZONTAL")
@@ -55,9 +63,9 @@ function canvasApp() {
     else if(modoDegradado === "RADIAL")
       degradado = context.createRadialGradient(centro_x, centro_y, x / 2, centro_x, centro_y, 0);
     var cantidad = colores.length;
-    var porcentaje = 1 / cantidad;
+    var porcentaje = 1 / (cantidad - 1);
 
-    for(i = 1; i <= cantidad; i++){
+    for(i = 1; i < cantidad; i++){
       degradado.addColorStop(porcentaje * i, colores[i - 1]);
     }
     if (cantidad == 0) {
@@ -67,6 +75,7 @@ function canvasApp() {
     context.fillStyle = degradado;
     context.fillRect(0, 0, x, y);
   }
+
   selectorColor.onclick = function(){
     this.value = colorAleatorio();
   }
@@ -74,6 +83,10 @@ function canvasApp() {
   btnAgregar.onclick = function() {
     colores.push( document.getElementById("selectorColor").value);
     drawScene();
+  }
+
+  btnAleatorio.onclick = function() {
+    degradadoAleatorio();
   }
 
   btnHorizontal.onclick = function() {
@@ -106,5 +119,5 @@ function canvasApp() {
     drawScene();
   }
 
-  drawScene();
+  degradadoAleatorio();
 }
