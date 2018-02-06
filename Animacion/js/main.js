@@ -4,6 +4,16 @@ function eventWindowLoaded() {
   canvasApp();
 }
 
+function eventWindowLoaded() {
+  var patternImage = new Image();
+  patternImage.onload = eventAssetsLoaded;
+  patternImage.src = 'img/pad.png';
+}
+
+function eventAssetsLoaded(){
+  canvasApp();
+}
+
 function canvasSupport() {
   return Modernizr.canvas;
 }
@@ -18,6 +28,9 @@ function canvasApp(){
 
   var canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
+
+  var patternImage = new Image();
+  patternImage.src = "img/pad.png";
 
   function radians(grados){
     return grados * Math.PI / 180;
@@ -57,6 +70,7 @@ function canvasApp(){
     var yPosition = (canvas.height / 2);
 
     var gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+    var pattern = context.createPattern(patternImage, 'repeat');
 
     for(var i = 0; i < colorStops.length; i++) {
       var tempColorStop = colorStops[i];
