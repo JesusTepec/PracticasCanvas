@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dibuja formas</title>
+    <script src="../js/AppDibujo.js"></script>
+    <script src="../../modernizr-custom.js"></script>
+    <script src="../Assets/jquery/jquery.min.js"></script>
+</head>
+<body>
+<div class="controles">
+    <div class="shapes">
+        <button id="linea" onclick="elegirShape('Linea');">/</button>
+        <button id="rectangulo" onclick="elegirShape('Rectangulo');">&rect;</button>
+    </div>
+    <div class="area-controles">
+        <div class="controles-shape" id="controlesLinea">
+            <h3>Cofiguración de línea</h3>
+            <label>Punto inicio</label>
+            x <input type="number" id="coordX" value="10">
+            y <input type="number" id="coordY" value="10">
+            <hr>
+            <label>Punto fin</label>
+            x <input type="number" id="coordXx" value="200">
+            y <input type="number" id="coordYy" value="200">
+        </div>
+        <div class="controles-shape" id="controlesRectangulo">
+
+        </div>
+    </div>
+    <div class="controles-generales">
+        <input type="color" id="inputColor">
+    </div>
+    <button>Dibujar</button>
+</div>
+<canvas id="canvas" width="640" height="480" style="border: 1px solid black"></canvas>
+
+<script>
+    $(document).ready(function (e) {
+        $("#controlesLinea").hide();
+    });
+
+    function elegirShape(shape) {
+        $(".controles-shape").hide();
+        $("#controles" + shape).show();
+    }
+</script>
+</body>
+</html>
