@@ -14,10 +14,40 @@ function canvasApp(){
     }
     var theCanvas = document.getElementById("canvas");
     var context = theCanvas.getContext("2d");
+    var r = 85;
+    var g = 150;
+    var b = 230;
+    var colorCielo = "rgb("+r+","+g+","+b+")";
+    var estado = 0;
+    var solY = 50;
+
+    function estadoDia(){
+        if(estado < 14){
+            r -= 5;
+            g -= 5;
+            b -= 5;
+            solY += 25;
+            estado++;
+        }else{
+            r = 85;
+            g = 150;
+            b = 230;
+            solY = 50;
+            estado = 0;
+        }
+        colorCielo = "rgb("+r+","+g+","+b+")";
+    }
 
     function drawScene(){
-        context.fillStyle = "#5599EE";
+        context.fillStyle = colorCielo;
         context.fillRect(0, 0, canvas.width, canvas.height / 2);
+
+        context.fillStyle = "#fdef2a";
+        context.beginPath();
+        context.arc(555, solY, 50, 0, Math.PI * 2);
+        context.closePath();
+        context.fill();
+
         context.fillStyle = "#15dd5a";
         context.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
 
@@ -42,8 +72,22 @@ function canvasApp(){
         context.arc(155, 250, 5, 0, Math.PI * 2);
         context.closePath();
         context.fill();
+
+        context.fillStyle = "#aa6a38";
+        context.beginPath();
+        context.moveTo(40, 100);
+        context.lineTo(210, 100);
+        context.lineTo(125, 50);
+        context.closePath();
+        context.fill();
     }
 
-    drawScene();
+    function gameLoop() {
+        window.setTimeout(gameLoop, 300);
+        estadoDia();
+        drawScene();
+    }
+
+    gameLoop();
 
 }
