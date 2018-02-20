@@ -3,47 +3,76 @@
 <head>
     <meta charset="utf-8">
     <title>Dibuja formas</title>
-    <script src="../js/AppDibujo.js"></script>
-    <script src="../../modernizr-custom.js"></script>
-    <script src="../Assets/jquery/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../Assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Assets/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<div class="controles">
-    <div class="shapes">
-        <button id="linea" onclick="elegirShape('Linea');">/</button>
-        <button id="rectangulo" onclick="elegirShape('Rectangulo');">&rect;</button>
-    </div>
-    <div class="area-controles">
-        <div class="controles-shape" id="controlesLinea">
-            <h3>Cofiguración de línea</h3>
-            <label>Punto inicio</label>
-            x <input type="number" id="coordX" value="10">
-            y <input type="number" id="coordY" value="10">
-            <hr>
-            <label>Punto fin</label>
-            x <input type="number" id="coordXx" value="200">
-            y <input type="number" id="coordYy" value="200">
+<section class="container">
+    <header class="row well well-inverse text-center">
+        <h1 class="titulo"> App de Dibujo </h1>
+    </header>
+    <section class="row controles panel panel-primary">
+        <div class="panel-heading text-center">
+            <h2 class="panel-title">Controles de dibujo</h2>
         </div>
-        <div class="controles-shape" id="controlesRectangulo">
-
+        <div class="panel-body">
+            <div class="shapes col-md-4">
+                <button class="btn btn-default" id="linea" onclick="elegirShape('Linea');">
+                    <img class="image-icon" src="../img/line.png">
+                </button>
+                <button class="btn btn-default btn-shape" id="rectangulo" onclick="elegirShape('Rectangulo');">
+                    <img class="image-icon" src="../img/square.png">
+                </button>
+            </div>
+            <div class="controles-generales col-md-4">
+                <div class="col-md-3">
+                    <input class="form-control" type="color" id="inputColor">
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-warning btn-block" id="btnDibujar">
+                        <i class="icono glyphicon glyphicon-picture"></i>Dibujar
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="controles-generales">
-        <input type="color" id="inputColor">
-    </div>
-    <button>Dibujar</button>
-</div>
-<canvas id="canvas" width="640" height="480" style="border: 1px solid black"></canvas>
+    </section>
+    <section class="row">
+        <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <canvas id="canvas" width="640" height="480" style="border: 1px solid black"></canvas>
+            </div>
+        </div>
+        </div>
+        <aside class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Controles de forma</h2>
+                </div>
+                <div class="area-controles panel-body">
+                    <div class="controles-shape" id="controlesLinea">
+                        <h3>Cofiguración de línea</h3>
+                        <hr>
+                        <label>Punto inicio</label>
+                        x <input type="number" id="coordX" value="10">
+                        y <input type="number" id="coordY" value="10">
+                        <br>
+                        <label>Punto fin</label>
+                        x <input type="number" id="coordXx" value="200">
+                        y <input type="number" id="coordYy" value="200">
+                    </div>
+                    <div class="controles-shape" id="controlesRectangulo">
 
-<script>
-    $(document).ready(function (e) {
-        $("#controlesLinea").hide();
-    });
-
-    function elegirShape(shape) {
-        $(".controles-shape").hide();
-        $("#controles" + shape).show();
-    }
-</script>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </section>
+</section>
+<script src="../../modernizr-custom.js"></script>
+<script src="../Assets/jquery/jquery.min.js"></script>
+<script src="../js/AppDibujo.js"></script>
 </body>
 </html>

@@ -5,3 +5,36 @@
     width: 640px;
     height: 480px;
 }
+
+.well-inverse{
+    background: #5599ee;
+    padding: 10px;
+}
+
+.titulo{
+    color: #ffc66d;
+    font-family: Pacifico, serif;
+}
+
+.panel-primary{
+    background: #5599ee;
+}
+
+.container{
+    margin-top: 1em;
+}
+
+.icono{
+    margin: 0 5% 0 5%;
+}
+
+.image-icon{
+    width: 50%;
+    height: 50%;
+    margin: 0;
+}
+
+.btn-shape{
+    padding-left: 0;
+    padding-right: 0;
+}

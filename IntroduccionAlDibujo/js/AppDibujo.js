@@ -34,6 +34,9 @@ function canvasApp(){
 
     $("#linea").click(function (e) {
         shapeActual = "Linea";
+    });
+
+    $("#btnDibujar").click(function (e) {
         color = $("#inputColor").val();
         var data = {x1: $("#coordX").val(), x2: $("#coordXx").val(), y1: $("#coordY").val(), y2: $("#coordYy").val()};
         drawScene(data);
@@ -41,4 +44,15 @@ function canvasApp(){
 
     drawScene({});
 
+}
+
+/********** Controles html *******************/
+
+$(document).ready(function (e) {
+    $("#controlesLinea").hide();
+});
+
+function elegirShape(shape) {
+    $(".controles-shape").hide();
+    $("#controles" + shape).show();
 }
