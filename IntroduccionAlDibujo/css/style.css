@@ -8,12 +8,15 @@
 
 .well-inverse{
     background: #5599ee;
-    padding: 10px;
+    padding: 0 10px 16px 10px;
+    border: 1px solid #2a2deb;
 }
 
 .titulo{
     color: #ffc66d;
     font-family: Pacifico, serif;
+    font-size: 3em;
+    text-shadow: 1px 1px 10px #e2462d;
 }
 
 .panel-primary{
@@ -34,7 +37,24 @@
     margin: 0;
 }
 
-.btn-shape{
+.btn-shape-c{
     padding-left: 0;
     padding-right: 0;
+}
+
+legend{
+    border-bottom: 1px solid #ffc66d;
+}
+
+.control-label{
+    padding-top: 2%;
+}
+
+.panel-footer{
+    padding: 6px 10px 1px 1px;
+    background: #337ab7;
+}
+
+.color{
+    padding: 4px;
 }

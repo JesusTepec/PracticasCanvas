@@ -8,64 +8,120 @@
     <link rel="stylesheet" href="../Assets/font-awesome/font-awesome.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body style="background: #accbff;">
 <section class="container">
     <header class="row well well-inverse text-center">
         <h1 class="titulo"> App de Dibujo </h1>
     </header>
-    <section class="row controles panel panel-primary">
-        <div class="panel-heading text-center">
-            <h2 class="panel-title">Controles de dibujo</h2>
-        </div>
-        <div class="panel-body">
-            <div class="shapes col-md-4">
-                <button class="btn btn-default" id="linea" onclick="elegirShape('Linea');">
-                    <img class="image-icon" src="../img/line.png">
-                </button>
-                <button class="btn btn-default btn-shape" id="rectangulo" onclick="elegirShape('Rectangulo');">
-                    <img class="image-icon" src="../img/square.png">
-                </button>
-            </div>
-            <div class="controles-generales col-md-4">
-                <div class="col-md-3">
-                    <input class="form-control" type="color" id="inputColor">
-                </div>
-                <div class="col-md-4">
-                    <button class="btn btn-warning btn-block" id="btnDibujar">
-                        <i class="icono glyphicon glyphicon-picture"></i>Dibujar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="row">
+
+    <section class="row" style="border: 1px dotted #2a2deb; padding-top: 20px; border-radius: 4px;">
         <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <canvas id="canvas" width="640" height="480" style="border: 1px solid black"></canvas>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <canvas id="canvas" width="640" height="480" style="border: 1px solid black"></canvas>
+                </div>
             </div>
-        </div>
         </div>
         <aside class="col-md-4">
-            <div class="panel panel-default">
+            <section class=" controles panel panel-primary">
+                <div class="panel-heading text-center">
+                    <h2 class="panel-title">Controles de dibujo</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="shapes col-md-6">
+                        <button class="btn btn-default btn-shape btn-shape-c" id="linea" onclick="elegirShape('Linea', this);">
+                            <img class="image-icon" src="../img/line.png">
+                        </button>
+                        <button class="btn btn-default btn-shape btn-shape-c" id="rectangulo" onclick="elegirShape('Rectangulo', this);">
+                            <img class="image-icon" src="../img/square.png">
+                        </button>
+                        <button class="btn btn-default btn-shape" id="borrador" onclick="elegirShape('Borrador', this);">
+                            <i class="glyphicon glyphicon-erase"></i>
+                        </button>
+                    </div>
+                    <div class="controles-generales col-md-6">
+                        <div class="col-md-6">
+                            <input class="form-control color" type="color" id="inputColor" title="Elige color">
+                        </div>
+                        <div class="col-md-12">
+                            <input class="form-control" type="range" max="12" step="2" value="1" id="inputTamanio">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h2 class="panel-title">Controles de forma</h2>
                 </div>
                 <div class="area-controles panel-body">
                     <div class="controles-shape" id="controlesLinea">
-                        <h3>Cofiguración de línea</h3>
-                        <hr>
-                        <label>Punto inicio</label>
-                        x <input type="number" id="coordX" value="10">
-                        y <input type="number" id="coordY" value="10">
-                        <br>
-                        <label>Punto fin</label>
-                        x <input type="number" id="coordXx" value="200">
-                        y <input type="number" id="coordYy" value="200">
+                        <legend>Cofiguración de línea</legend>
+                        <div class="form-group">
+                            <label class="col-md-12">Punto inicio</label>
+                            <label class="col-md-1 control-label" for="coordX">x </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="coordX" value="10">
+                            </div>
+                            <label class="col-md-1 control-label" for="coordY">y </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="coordY" value="10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12" style="margin-top: 10px">Punto fin</label>
+                            <label class="col-md-1 control-label" for="coordXx">x </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="coordXx" value="100">
+                            </div>
+                            <label class="col-md-1 control-label" for="coordYy">y </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="coordYy" value="10">
+                            </div>
+                        </div>
                     </div>
                     <div class="controles-shape" id="controlesRectangulo">
-
+                        <legend>Cofiguración de rectángulo</legend>
+                        <div class="form-group">
+                            <label class="col-md-12">Posición</label>
+                            <label class="col-md-1 control-label" for="rectX">x </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="rectX" value="10">
+                            </div>
+                            <label class="col-md-1 control-label" for="rectY">y </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="rectY" value="10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12" style="margin-top: 10px">Tamaño</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <label class="col-md-2 control-label" for="rectW">ancho: </label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="number" id="rectW" value="100">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 control-label" for="rectH">alto: </label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="number" id="rectH" value="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="controles-shape" id="controlesBorrador">
+                        <div class="alert alert-info">
+                            <i class="glyphicon glyphicon-info-sign"></i> Aún no se ha seleccionado ninguna figura.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <p class="text-right">
+                        <button class="btn btn-warning" id="btnDibujar">
+                            <i class="icono glyphicon glyphicon-picture"></i>Dibujar
+                        </button>
+                    </p>
                 </div>
             </div>
         </aside>
