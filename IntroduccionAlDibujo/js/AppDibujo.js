@@ -1,5 +1,6 @@
 window.addEventListener("load", eventWindowLoaded, false);
 var shapeActual = "";
+var relleno = false;
 
 function eventWindowLoaded() {
     canvasApp();
@@ -15,8 +16,6 @@ function canvasApp(){
     }
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
-    var color = "#000000";
-    var lineWidth = 1;
     var mouse = false;
     var estados = [0, 0, 0];
     var xTemp = 0;
@@ -24,7 +23,6 @@ function canvasApp(){
     shapeActual = "";
 
     function dibujarLinea(data) {
-        console.log(data);
         if (estados[0]) {
             context.beginPath();
             context.moveTo(data.x1, data.y1);
@@ -36,7 +34,33 @@ function canvasApp(){
     }
 
     function dibujarRectangulo(data) {
-        context.strokeRect(data.x, data.y, data.w, data.h);
+        if(data.length !== 0) {
+            if(relleno)
+                context.fillRect(data.x, data.y, data.w, data.h);
+            context.strokeRect(data.x, data.y, data.w, data.h);
+        }
+    }
+
+    function dibujarCirculo(data){
+        if(data.length !== 0) {
+            context.beginPath();
+            context.arc(data.x, data.y, data.r, 0, 2 * Math.PI);
+            context.closePath();
+            if(relleno)
+                context.fill();
+            context.stroke()
+        }
+    }
+
+    function dibujarElipse(data){
+        if(data.length !== 0) {
+            context.beginPath();
+            context.ellipse(data.x, data.y, data.w, data.h, 0, 0, 2 * Math.PI);
+            context.closePath();
+            if(relleno)
+                context.fill();
+            context.stroke()
+        }
     }
 
     function borrador(coordenada) {
@@ -45,103 +69,108 @@ function canvasApp(){
         context.clearRect(coordenada.x - 10, coordenada.y - 10, w, h);
     }
 
-    function drawScene(coordenadas){
-        context.lineWidth = lineWidth;
-        context.strokeStyle = color;
+    function lineaEstados(coordenadas, input) {
         var data = {};
+        if(input === true){
+            data = {x1: $("#coordX").val(), y1: $("#coordY").val(), x2: $("#coordXx").val(), y2: $("#coordYy").val()};
+            estados = [1, 1, 1];
+        }else {
+            if (estados[0]) {
+                data = {x1: coordenadas.x, x2: 0, y1: coordenadas.y, y2: 0};
+                $("#coordX").val(coordenadas.x);
+                $("#coordY").val(coordenadas.y);
+            }
+            if (estados[2]) {
+                data = {x1: 0, x2: coordenadas.x, y1: 0, y2: coordenadas.y};
+            }
+            $("#coordXx").val(coordenadas.x);
+            $("#coordYy").val(coordenadas.y);
+        }
+        dibujarLinea(data);
+
+    }
+
+    function rectanguloEstados(coordenadas, input){
+        var data = {};
+        if(input) {
+            data = {x: $("#rectX").val(), y: $("#rectY").val(), w: $("#rectW").val(), h: $("#rectH").val()};
+        }else {
+            if (estados[0]) {
+                xTemp = coordenadas.x;
+                yTemp = coordenadas.y;
+                $("#rectX").val(coordenadas.x);
+                $("#rectY").val(coordenadas.y);
+            }
+            if (estados[2]) {
+                data = {x: xTemp, y: yTemp, w: coordenadas.x - xTemp, h: coordenadas.y - yTemp};
+            }
+            $("#rectW").val(coordenadas.x - xTemp);
+            $("#rectH").val(coordenadas.y - yTemp);
+        }
+        dibujarRectangulo(data);
+    }
+
+    function circuloEstados(coordenadas, input){
+        var data = {};
+        if(input) {
+            data = {x: $("#circleX").val(), y: $("#circleY").val(), r: $("#circleRadio").val()};
+            dibujarCirculo(data)
+        }else {
+            if (estados[0]) {
+                xTemp = coordenadas.x;
+                yTemp = coordenadas.y;
+                $("#circleX").val(coordenadas.x);
+                $("#circleY").val(coordenadas.y);
+            }
+            if (estados[2]) {
+                var w = (coordenadas.x - xTemp) / 2;
+                var h = (coordenadas.y - yTemp) / 2;
+                //    var c = Math.sqrt(Math.pow(w,2) - Math.pow(h,2));
+                data = {x: xTemp + w, y: yTemp + h, w: Math.abs(w), h: Math.abs(h)};
+
+                console.log(data);
+                dibujarElipse(data);
+            }
+        }
+    }
+
+    function drawScene(coordenadas, input){
+        context.lineWidth = $("#inputTamanio").val();
+        context.strokeStyle = $("#inputColor").val();
+        context.fillStyle = "#F06";
         switch (shapeActual){
             case "linea":
-                if(!coordenadas.x) {
-                    data = {
-                        x1: $("#coordX").val(),
-                        x2: $("#coordXx").val(),
-                        y1: $("#coordY").val(),
-                        y2: $("#coordYy").val()
-                    };
-                    estados = [1, 1, 1];
-                    dibujarLinea(data);
-                    estados = [0, 0, 0];
-                } else {
-                    if(estados[0]) {
-                        data = {
-                            x1: coordenadas.x,
-                            x2: 0,
-                            y1: coordenadas.y,
-                            y2: 0
-                        };
-                        dibujarLinea(data);
-                        $("#coordX").val(coordenadas.x);
-                        $("#coordY").val(coordenadas.y);
-                    }
-                    if(estados[2]) {
-                        data = {
-                            x1: 0,
-                            x2: coordenadas.x,
-                            y1: 0,
-                            y2: coordenadas.y
-                        };
-                        dibujarLinea(data);
-                    }
-                    $("#coordXx").val(coordenadas.x);
-                    $("#coordYy").val(coordenadas.y);
-                }
+                lineaEstados(coordenadas, input);
                 break;
             case "rectangulo":
-                if(!coordenadas.x) {
-                    data = {
-                        x: $("#rectX").val(),
-                        y: $("#rectY").val(),
-                        w: $("#rectW").val(),
-                        h: $("#rectH").val()
-                    };
-                    dibujarRectangulo(data);
-                } else {
-                    if(estados[0]) {
-                        xTemp = coordenadas.x;
-                        yTemp = coordenadas.y;
-                        $("#rectX").val(coordenadas.x);
-                        $("#rectY").val(coordenadas.y);
-                    }
-                    if(estados[2]) {
-                        data = {
-                            x: xTemp,
-                            y: yTemp,
-                            w: coordenadas.x - xTemp,
-                            h: coordenadas.y - yTemp
-                        };
-                        dibujarRectangulo(data);
-                    }
-                    $("#rectW").val(coordenadas.x);
-                    $("#rectH").val(coordenadas.y);
-                }
+                rectanguloEstados(coordenadas, input);
+                break;
+            case "circulo":
+                circuloEstados(coordenadas, input);
                 break;
             case "borrador":
                 borrador(coordenadas);
                 break;
         }
-
+        estados = [0, 0, 0];
     }
 
     $("#btnDibujar").click(function (e) {
-        color = $("#inputColor").val();
-        drawScene({});
+        drawScene({}, true);
     });
 
     canvas.onmousemove = function(e) {
         if(mouse){
-            color = $("#inputColor").val();
             var canvaspos = canvas.getBoundingClientRect();
             var coord = {x: e.clientX - canvaspos.left, y: e.clientY - canvaspos.top};
-            drawScene(coord);
+            drawScene(coord, false);
         }
     };
 
     canvas.onclick = function(e){
-        color = $("#inputColor").val();
-        lineWidth = $("#inputTamanio").val();
         var canvaspos = canvas.getBoundingClientRect();
         var coord = {x: e.clientX - canvaspos.left, y: e.clientY - canvaspos.top};
-        drawScene(coord);
+        drawScene(coord, false);
     };
 
     canvas.onmousedown = function(e) {
@@ -149,8 +178,7 @@ function canvasApp(){
         var canvaspos = canvas.getBoundingClientRect();
         var coord = {x: e.clientX - canvaspos.left, y: e.clientY - canvaspos.top};
         estados = [1, 0, 0];
-        drawScene(coord);
-        estados = [0, 0, 0];
+        drawScene(coord, false);
     };
 
     canvas.onmouseup = function(e) {
@@ -158,11 +186,10 @@ function canvasApp(){
         var canvaspos = canvas.getBoundingClientRect();
         var coord = {x: e.clientX - canvaspos.left, y: e.clientY - canvaspos.top};
         estados = [0, 0, 1];
-        drawScene(coord);
-        estados = [0, 0, 0];
+        drawScene(coord, false);
     };
 
-    drawScene({});
+    drawScene({}, false);
 
 }
 
@@ -171,12 +198,26 @@ function canvasApp(){
 $(document).ready(function (e) {
     $("#controlesLinea").hide();
     $("#controlesRectangulo").hide();
+    $("#controlesCirculo").hide();
 });
 
 function elegirShape(shape, boton) {
     $(".controles-shape").hide();
-    $("#controles" + shape).show();
+    if(shape === "Borrador")
+        $("#controlesBorrador").show();
+    else
+        $("#controles" + shape).show();
     shapeActual = shape.toLowerCase();
     $('.btn-shape').removeClass('btn-info');
     $(boton).addClass('btn-info');
+}
+
+function elegirRelleno(boton){
+    if(!relleno){
+        $(boton).addClass('btn-info');
+        relleno = true;
+    }else{
+        $(boton).removeClass('btn-info');
+        relleno = false;
+    }
 }

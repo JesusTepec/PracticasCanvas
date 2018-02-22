@@ -32,14 +32,12 @@
 }
 
 .image-icon{
-    width: 50%;
-    height: 50%;
-    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .btn-shape-c{
-    padding-left: 0;
-    padding-right: 0;
+    padding: 100%;
 }
 
 legend{
@@ -57,4 +55,9 @@ legend{
 
 .color{
     padding: 4px;
+}
+
+.row{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }

@@ -5,7 +5,7 @@
     <title>Dibuja formas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../Assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../Assets/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="../Assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body style="background: #accbff;">
@@ -28,29 +28,47 @@
                     <h2 class="panel-title">Controles de dibujo</h2>
                 </div>
                 <div class="panel-body">
-                    <div class="shapes col-md-6">
-                        <button class="btn btn-default btn-shape btn-shape-c" id="linea" onclick="elegirShape('Linea', this);">
-                            <img class="image-icon" src="../img/line.png">
-                        </button>
-                        <button class="btn btn-default btn-shape btn-shape-c" id="rectangulo" onclick="elegirShape('Rectangulo', this);">
-                            <img class="image-icon" src="../img/square.png">
-                        </button>
-                        <button class="btn btn-default btn-shape" id="borrador" onclick="elegirShape('Borrador', this);">
-                            <i class="glyphicon glyphicon-erase"></i>
-                        </button>
-                    </div>
-                    <div class="controles-generales col-md-6">
-                        <div class="col-md-6">
-                            <input class="form-control color" type="color" id="inputColor" title="Elige color">
+                    <div class="row">
+                        <div class="shapes col-md-12">
+                            <div class="col-md-12">
+                                <button class="btn btn-default btn-shape" id="linea" onclick="elegirShape('Linea', this);">
+                                    <i class="glyphicon glyphicon-minus"></i>
+                                </button>
+
+                                <button class="btn btn-default btn-shape " id="rectangulo" onclick="elegirShape('Rectangulo', this);">
+                                    <i class="fa fa-square-o"></i>
+                                </button>
+
+                                <button class="btn btn-default btn-shape " id="circulo" onclick="elegirShape('Circulo', this);">
+                                    <i class="fa fa-circle-o"></i>
+                                </button>
+
+                                <button class="btn btn-default btn-shape" id="borrador" onclick="elegirShape('Borrador', this);">
+                                    <i class="glyphicon glyphicon-erase"></i>
+                                </button>
+
+                                <button class="btn btn-default btn-relleno" id="rellenar" onclick="elegirRelleno(this);">
+                                    <i class="fa fa-stop"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-12">
-                            <input class="form-control" type="range" max="12" step="2" value="1" id="inputTamanio">
+                    </div>
+                    <div class="row">
+                        <div class="controles-generales col-md-12">
+                            <label for="inputTamanio" class="col-md-2 control-label">Color: </label>
+                            <div class="col-md-3">
+                                <input class="form-control color" type="color" id="inputColor" title="Elige color">
+                            </div>
+                            <label for="inputTamanio" class="col-md-3 control-label">Tamaño: </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="inputTamanio" value="1">
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
             <div class="panel panel-primary">
-                <div class="panel-heading">
+                <div class="panel-heading text-center">
                     <h2 class="panel-title">Controles de forma</h2>
                 </div>
                 <div class="area-controles panel-body">
@@ -105,6 +123,31 @@
                                     <label class="col-md-2 control-label" for="rectH">alto: </label>
                                     <div class="col-md-6">
                                         <input class="form-control" type="number" id="rectH" value="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controles-shape" id="controlesCirculo">
+                        <legend>Cofiguración de círculo</legend>
+                        <div class="form-group">
+                            <label class="col-md-12">Posición</label>
+                            <label class="col-md-1 control-label" for="circleX">x </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="circleX" value="100">
+                            </div>
+                            <label class="col-md-1 control-label" for="circleY">y </label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="number" id="circleY" value="100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12" style="margin-top: 10px">Tamaño</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <label class="col-md-2 control-label" for="circleRadio">Radio: </label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="number" id="circleRadio" value="50">
                                     </div>
                                 </div>
                             </div>
