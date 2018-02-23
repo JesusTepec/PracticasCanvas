@@ -64,8 +64,9 @@ function canvasApp(){
     }
 
     function borrador(coordenada) {
-        var w = 20;
-        var h = 20;
+        var size = $("#inputTamanio").val();
+        var w = 5 + size;
+        var h = 5 + size;
         context.clearRect(coordenada.x - 10, coordenada.y - 10, w, h);
     }
 
@@ -127,8 +128,6 @@ function canvasApp(){
                 var h = (coordenadas.y - yTemp) / 2;
                 //    var c = Math.sqrt(Math.pow(w,2) - Math.pow(h,2));
                 data = {x: xTemp + w, y: yTemp + h, w: Math.abs(w), h: Math.abs(h)};
-
-                console.log(data);
                 dibujarElipse(data);
             }
         }
@@ -137,7 +136,7 @@ function canvasApp(){
     function drawScene(coordenadas, input){
         context.lineWidth = $("#inputTamanio").val();
         context.strokeStyle = $("#inputColor").val();
-        context.fillStyle = "#F06";
+        context.fillStyle = $("#inputColorFondo").val();
         switch (shapeActual){
             case "linea":
                 lineaEstados(coordenadas, input);
