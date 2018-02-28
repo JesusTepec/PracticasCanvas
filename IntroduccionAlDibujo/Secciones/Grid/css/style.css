@@ -9,16 +9,23 @@ h1 {
   font-size: 2.5em;
   text-align: center;
   transition: all 0.5s;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
+
 p {
-  margin: 0px 0px 6px 0px;
-  padding: 0px;
+  margin: 0 0 6px 0;
+  padding: 0;
 }
 
 h1:hover {
   animation: neon2 1.5s ease-in-out infinite alternate;
+}
+
+canvas {
+  background-color: #FFF;
+  border: dotted 3px yellow;
+  border-radius: 2px;
 }
 
 @keyframes neon2 {
@@ -32,12 +39,6 @@ h1:hover {
 
 #contenedorCanvas{
   text-align: center;
-}
-
-canvas {
-  background-color: #FFF;
-  border: dotted 3px yellow;
-  border-radius: 2px;
 }
 
 #herramientas {

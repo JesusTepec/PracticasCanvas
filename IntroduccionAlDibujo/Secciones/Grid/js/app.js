@@ -7,9 +7,7 @@ window.onload = function() {
     var sizeCuadro = {ancho: 25, alto: 25};
     var color = "red";
     var inputColor = document.getElementById("color");
-  //  var chkGrid = document.getElementById("chkCuadricula");
     var inputSizeCuadros = document.getElementById("sizeCuadros");
-    var dibujarGrid = true;
 
     if (canvas && canvas.getContext) {
         var ctx = canvas.getContext("2d");
@@ -25,15 +23,14 @@ window.onload = function() {
                 ctx.lineWidth = anchoLinea;
                 var columnas = [];
                 var filas = [];
-
-                for (var i = disX; i < canvas.width; i += disX) {
+                for (var i = disX + anchoLinea; i < canvas.width; i += disX) {
                     ctx.beginPath();
                     ctx.moveTo(i, 0);
                     ctx.lineTo(i, canvas.height);
                     ctx.stroke();
                     columnas.push(i);
                 }
-                for (var i = disY; i < canvas.height; i += disY) {
+                for (i = disY; i < canvas.height; i += disY) {
                     ctx.beginPath();
                     ctx.moveTo(0, i);
                     ctx.lineTo(ctx.canvas.width, i);
@@ -44,7 +41,7 @@ window.onload = function() {
                 filas.push(0);
                 for (x = 0; x < columnas.length; x++) {
                     for (y = 0; y < filas.length; y++) {
-                        cuadritos.push([columnas[x], columnas[y], disX, disY]);
+                        cuadritos.push([columnas[x], filas[y], disX, disY]);
                     }
                 }
             }
@@ -62,8 +59,7 @@ window.onload = function() {
                         ctx.fillRect(cuadro[0], cuadro[1], sizeCuadro.ancho, sizeCuadro.alto);
                     }
                 }
-                if(dibujarGrid)
-                  dibujaGrid(sizeCuadro.ancho, sizeCuadro.alto, 0.4, "Red");
+                dibujaGrid(sizeCuadro.ancho, sizeCuadro.alto, 0.4, "Red");
             }
 
             canvas.onmousemove = function(e) {
@@ -78,22 +74,18 @@ window.onload = function() {
                 fillCell(e.clientX - canvaspos.left, e.clientY - canvaspos.top, color)
             };
 
-            canvas.onmousedown = function(e) {
+            canvas.onmousedown = function() {
                 mouse = true;
             };
 
-            canvas.onmouseup = function(e) {
+            canvas.onmouseup = function() {
                 mouse = false;
             };
 
             inputColor.addEventListener('change', function() {
                 color = this.value;
             }, false);
-/*
-            chkGrid.onclick = function () {
-                dibujarGrid = this.checked;
-            };
-*/
+
             inputSizeCuadros.addEventListener('change', function () {
                 sizeCuadro.ancho = parseInt(this.value);
                 sizeCuadro.alto = parseInt(this.value);
