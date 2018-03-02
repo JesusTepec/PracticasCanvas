@@ -1,10 +1,8 @@
-
 body {
   background: rgba(25, 100, 120, 0.5);
 }
-
 h1 {
-  font-family: Pacifico;
+  font-family: Pacifico, serif ;
   color: #FF3333;
   font-size: 2.5em;
   text-align: center;
@@ -12,22 +10,18 @@ h1 {
   margin: 0;
   padding: 0;
 }
-
 p {
   margin: 0 0 6px 0;
   padding: 0;
 }
-
 h1:hover {
   animation: neon2 1.5s ease-in-out infinite alternate;
 }
-
 canvas {
   background-color: #FFF;
   border: dotted 3px yellow;
   border-radius: 2px;
 }
-
 @keyframes neon2 {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
@@ -36,11 +30,9 @@ canvas {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
   }
 }
-
 #contenedorCanvas{
   text-align: center;
 }
-
 #herramientas {
   margin: 10px 60px 10px 60px;
   padding: 20px;
