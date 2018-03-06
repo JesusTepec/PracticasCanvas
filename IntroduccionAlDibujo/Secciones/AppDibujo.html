@@ -31,6 +31,10 @@
                     <div class="row">
                         <div class="shapes col-md-12">
                             <div class="col-md-12">
+                                <button class="btn btn-info btn-shape" id="pencil" onclick="elegirShape('Pencil', this);">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+
                                 <button class="btn btn-default btn-shape" id="linea" onclick="elegirShape('Linea', this);">
                                     <i class="glyphicon glyphicon-minus"></i>
                                 </button>
@@ -162,6 +166,11 @@
                         </div>
                     </div>
                     <div class="controles-shape" id="controlesBorrador">
+                        <div class="alert alert-info">
+                            <i class="glyphicon glyphicon-info-sign"></i> Aún no se ha seleccionado ninguna figura.
+                        </div>
+                    </div>
+                    <div class="controles-shape" id="controlesPencil">
                         <div class="alert alert-info">
                             <i class="glyphicon glyphicon-info-sign"></i> Aún no se ha seleccionado ninguna figura.
                         </div>

@@ -20,7 +20,7 @@ function canvasApp(){
     var estados = [0, 0, 0];
     var xTemp = 0;
     var yTemp = 0;
-    shapeActual = "";
+    shapeActual = "pencil";
 
     function dibujarLinea(data) {
         if (estados[0]) {
@@ -29,6 +29,21 @@ function canvasApp(){
         }
         if(estados[2]) {
             context.lineTo(data.x2, data.y2);
+            context.stroke();
+        }
+    }
+
+    function dibujarLineaContinua(data){
+        if (estados[0]){
+            context.beginPath();
+            context.moveTo(data.x, data.y);
+        }
+        if(estados[1]){
+            context.lineTo(data.x, data.y);
+            context.stroke();
+        }
+        if(estados[2]){
+            context.lineTo(data.x, data.y);
             context.stroke();
         }
     }
@@ -141,6 +156,9 @@ function canvasApp(){
             case "linea":
                 lineaEstados(coordenadas, input);
                 break;
+            case "pencil":
+                dibujarLineaContinua(coordenadas);
+                break;
             case "rectangulo":
                 rectanguloEstados(coordenadas, input);
                 break;
@@ -162,6 +180,7 @@ function canvasApp(){
         if(mouse){
             var canvaspos = canvas.getBoundingClientRect();
             var coord = {x: e.clientX - canvaspos.left, y: e.clientY - canvaspos.top};
+            estados = [0, 1, 0];
             drawScene(coord, false);
         }
     };
@@ -198,6 +217,7 @@ $(document).ready(function (e) {
     $("#controlesLinea").hide();
     $("#controlesRectangulo").hide();
     $("#controlesCirculo").hide();
+    $("#controlesPencil").hide();
 });
 
 function elegirShape(shape, boton) {
