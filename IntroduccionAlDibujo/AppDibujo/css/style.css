@@ -3,18 +3,22 @@
     padding: 0 10px 16px 10px;
     border: 1px solid #2a2deb;
 }
+
 .titulo{
     color: #ffc66d;
-    font-family: Pacifico, serif;
+    font-family: Pacifico, Serif;
     font-size: 3em;
     text-shadow: 1px 1px 10px #e2462d;
 }
+
 .panel-primary{
     background: #5599ee;
 }
+
 .container{
     margin-top: 1em;
 }
+
 .icono{
     margin: 0 5% 0 5%;
 }
@@ -31,11 +35,25 @@
 .color{
     padding: 4px;
 }
+
 .row{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
+
 legend{
     border-bottom: 1px solid #ffc66d;
 }
-body {background: #accbff;}
+
+body{
+    background: #accbff;
+}
+
+
+
+
+
+
+
+
+
